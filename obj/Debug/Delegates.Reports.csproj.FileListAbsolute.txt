@@ -1,0 +1,9 @@
+C:\MyRepo\Delegates.Reports\bin\Debug\Delegates.Reports.exe.config
+C:\MyRepo\Delegates.Reports\bin\Debug\Delegates.Reports.exe
+C:\MyRepo\Delegates.Reports\bin\Debug\Delegates.Reports.pdb
+C:\MyRepo\Delegates.Reports\bin\Debug\nunit.framework.dll
+C:\MyRepo\Delegates.Reports\bin\Debug\nunitlite.dll
+C:\MyRepo\Delegates.Reports\obj\Debug\Delegates.Reports.csprojResolveAssemblyReference.cache
+C:\MyRepo\Delegates.Reports\obj\Debug\Delegates.Reports.csproj.CoreCompileInputs.cache
+C:\MyRepo\Delegates.Reports\obj\Debug\Delegates.Reports.exe
+C:\MyRepo\Delegates.Reports\obj\Debug\Delegates.Reports.pdb
