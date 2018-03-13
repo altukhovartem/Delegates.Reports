@@ -1,54 +1,32 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<test-run id="2" name="Delegates.Reports.exe" fullname="C:/MyRepo/Delegates.Reports/bin/Debug/Delegates.Reports.exe" testcasecount="4" result="Failed" start-time="2018-03-05 16:57:25Z" end-time="2018-03-05 16:57:25Z" duration="0.074897" total="4" passed="2" failed="2" inconclusive="0" skipped="0" asserts="2" random-seed="196856557">
+<test-run id="2" name="Delegates.Reports.exe" fullname="C:/MyRepo/Delegates.Reports/bin/Debug/Delegates.Reports.exe" testcasecount="4" result="Passed" start-time="2018-03-13 21:14:33Z" end-time="2018-03-13 21:14:33Z" duration="0.118890" total="4" passed="4" failed="0" inconclusive="0" skipped="0" asserts="4" random-seed="566998279">
   <command-line><![CDATA["C:\MyRepo\Delegates.Reports\bin\Debug\Delegates.Reports.exe"   ]]></command-line>
   <filter />
-  <test-suite type="Assembly" id="1005" name="Delegates.Reports.exe" fullname="C:/MyRepo/Delegates.Reports/bin/Debug/Delegates.Reports.exe" runstate="Runnable" testcasecount="4" result="Failed" site="Child" start-time="2018-03-05 16:57:25Z" end-time="2018-03-05 16:57:25Z" duration="0.074897" total="4" passed="2" failed="2" warnings="0" inconclusive="0" skipped="0" asserts="2">
-    <environment framework-version="3.6.0.0" clr-version="4.0.30319.42000" os-version="Microsoft Windows NT 6.2.9200.0" platform="Win32NT" cwd="C:\MyRepo\Delegates.Reports\bin\Debug" machine-name="MSK-WS-120" user="aaltukhov" user-domain="INT" culture="ru-RU" uiculture="en-US" os-architecture="x86" />
+  <test-suite type="Assembly" id="1005" name="Delegates.Reports.exe" fullname="C:/MyRepo/Delegates.Reports/bin/Debug/Delegates.Reports.exe" runstate="Runnable" testcasecount="4" result="Passed" start-time="2018-03-13 21:14:33Z" end-time="2018-03-13 21:14:33Z" duration="0.118890" total="4" passed="4" failed="0" warnings="0" inconclusive="0" skipped="0" asserts="4">
+    <environment framework-version="3.6.0.0" clr-version="4.0.30319.42000" os-version="Microsoft Windows NT 6.2.9200.0" platform="Win32NT" cwd="C:\MyRepo\Delegates.Reports\bin\Debug" machine-name="DESKTOP-MJHFLF4" user="altuk" user-domain="DESKTOP-MJHFLF4" culture="en-US" uiculture="en-US" os-architecture="x86" />
     <settings>
       <setting name="WorkDirectory" value="C:\MyRepo\Delegates.Reports\bin\Debug" />
       <setting name="NumberOfTestWorkers" value="4" />
     </settings>
     <properties>
-      <property name="_PID" value="20972" />
+      <property name="_PID" value="11304" />
       <property name="_APPDOMAIN" value="Delegates.Reports.exe" />
     </properties>
-    <failure>
-      <message><![CDATA[One or more child tests had errors]]></message>
-    </failure>
-    <test-suite type="TestSuite" id="1006" name="Delegates" fullname="Delegates" runstate="Runnable" testcasecount="4" result="Failed" site="Child" start-time="2018-03-05 16:57:25Z" end-time="2018-03-05 16:57:25Z" duration="0.062040" total="4" passed="2" failed="2" warnings="0" inconclusive="0" skipped="0" asserts="2">
-      <failure>
-        <message><![CDATA[One or more child tests had errors]]></message>
-      </failure>
-      <test-suite type="TestSuite" id="1007" name="Reports" fullname="Delegates.Reports" runstate="Runnable" testcasecount="4" result="Failed" site="Child" start-time="2018-03-05 16:57:25Z" end-time="2018-03-05 16:57:25Z" duration="0.058664" total="4" passed="2" failed="2" warnings="0" inconclusive="0" skipped="0" asserts="2">
-        <failure>
-          <message><![CDATA[One or more child tests had errors]]></message>
-        </failure>
-        <test-suite type="TestFixture" id="1000" name="ReportMaker_should" fullname="Delegates.Reports.ReportMaker_should" classname="Delegates.Reports.ReportMaker_should" runstate="Runnable" testcasecount="4" result="Failed" site="Child" start-time="2018-03-05 16:57:25Z" end-time="2018-03-05 16:57:25Z" duration="0.053800" total="4" passed="2" failed="2" warnings="0" inconclusive="0" skipped="0" asserts="2">
-          <failure>
-            <message><![CDATA[One or more child tests had errors]]></message>
-          </failure>
-          <test-case id="1001" name="MeanAndStdHtml" fullname="Delegates.Reports.ReportMaker_should.MeanAndStdHtml" methodname="MeanAndStdHtml" classname="Delegates.Reports.ReportMaker_should" runstate="Runnable" seed="53696299" result="Passed" start-time="2018-03-05 16:57:25Z" end-time="2018-03-05 16:57:25Z" duration="0.018600" asserts="1" />
-          <test-case id="1003" name="MeanAndStdMarkdown" fullname="Delegates.Reports.ReportMaker_should.MeanAndStdMarkdown" methodname="MeanAndStdMarkdown" classname="Delegates.Reports.ReportMaker_should" runstate="Runnable" seed="1737089717" result="Failed" label="Error" start-time="2018-03-05 16:57:25Z" end-time="2018-03-05 16:57:25Z" duration="0.010573" asserts="0">
+    <test-suite type="TestSuite" id="1006" name="Delegates" fullname="Delegates" runstate="Runnable" testcasecount="4" result="Passed" start-time="2018-03-13 21:14:33Z" end-time="2018-03-13 21:14:33Z" duration="0.096103" total="4" passed="4" failed="0" warnings="0" inconclusive="0" skipped="0" asserts="4">
+      <test-suite type="TestSuite" id="1007" name="Reports" fullname="Delegates.Reports" runstate="Runnable" testcasecount="4" result="Passed" start-time="2018-03-13 21:14:33Z" end-time="2018-03-13 21:14:33Z" duration="0.092777" total="4" passed="4" failed="0" warnings="0" inconclusive="0" skipped="0" asserts="4">
+        <test-suite type="TestFixture" id="1000" name="ReportMaker_should" fullname="Delegates.Reports.ReportMaker_should" classname="Delegates.Reports.ReportMaker_should" runstate="Runnable" testcasecount="4" result="Passed" start-time="2018-03-13 21:14:33Z" end-time="2018-03-13 21:14:33Z" duration="0.085888" total="4" passed="4" failed="0" warnings="0" inconclusive="0" skipped="0" asserts="4">
+          <test-case id="1001" name="MeanAndStdHtml" fullname="Delegates.Reports.ReportMaker_should.MeanAndStdHtml" methodname="MeanAndStdHtml" classname="Delegates.Reports.ReportMaker_should" runstate="Runnable" seed="1977591879" result="Passed" start-time="2018-03-13 21:14:33Z" end-time="2018-03-13 21:14:33Z" duration="0.043566" asserts="1" />
+          <test-case id="1003" name="MeanAndStdMarkdown" fullname="Delegates.Reports.ReportMaker_should.MeanAndStdMarkdown" methodname="MeanAndStdMarkdown" classname="Delegates.Reports.ReportMaker_should" runstate="Runnable" seed="288915604" result="Passed" start-time="2018-03-13 21:14:33Z" end-time="2018-03-13 21:14:33Z" duration="0.001867" asserts="1">
             <properties>
               <property name="Description" value="Новый тест, который нужно сделать рабочим после рефакторинга" />
             </properties>
-            <failure>
-              <message><![CDATA[System.NotImplementedException : The method or operation is not implemented.]]></message>
-              <stack-trace><![CDATA[   at Delegates.Reports.ReportMakerHelper.MeanAndStdMarkdownReport(IEnumerable`1 measurements) in C:\MyRepo\Delegates.Reports\ReportMaker.cs:line 129
-   at Delegates.Reports.ReportMaker_should.MeanAndStdMarkdown() in C:\MyRepo\Delegates.Reports\ReportMaker_should.cs:line 52]]></stack-trace>
-            </failure>
           </test-case>
-          <test-case id="1004" name="MedianHtml" fullname="Delegates.Reports.ReportMaker_should.MedianHtml" methodname="MedianHtml" classname="Delegates.Reports.ReportMaker_should" runstate="Runnable" seed="2127168123" result="Failed" label="Error" start-time="2018-03-05 16:57:25Z" end-time="2018-03-05 16:57:25Z" duration="0.000809" asserts="0">
+          <test-case id="1004" name="MedianHtml" fullname="Delegates.Reports.ReportMaker_should.MedianHtml" methodname="MedianHtml" classname="Delegates.Reports.ReportMaker_should" runstate="Runnable" seed="545953144" result="Passed" start-time="2018-03-13 21:14:33Z" end-time="2018-03-13 21:14:33Z" duration="0.009236" asserts="1">
             <properties>
               <property name="Description" value="Новый тест, который нужно сделать рабочим после рефакторинга" />
             </properties>
-            <failure>
-              <message><![CDATA[System.NotImplementedException : The method or operation is not implemented.]]></message>
-              <stack-trace><![CDATA[   at Delegates.Reports.ReportMakerHelper.MedianHtmlReport(IEnumerable`1 measurements) in C:\MyRepo\Delegates.Reports\ReportMaker.cs:line 134
-   at Delegates.Reports.ReportMaker_should.MedianHtml() in C:\MyRepo\Delegates.Reports\ReportMaker_should.cs:line 60]]></stack-trace>
-            </failure>
           </test-case>
-          <test-case id="1002" name="MedianMarkdown" fullname="Delegates.Reports.ReportMaker_should.MedianMarkdown" methodname="MedianMarkdown" classname="Delegates.Reports.ReportMaker_should" runstate="Runnable" seed="145495598" result="Passed" start-time="2018-03-05 16:57:25Z" end-time="2018-03-05 16:57:25Z" duration="0.003797" asserts="1" />
+          <test-case id="1002" name="MedianMarkdown" fullname="Delegates.Reports.ReportMaker_should.MedianMarkdown" methodname="MedianMarkdown" classname="Delegates.Reports.ReportMaker_should" runstate="Runnable" seed="160288766" result="Passed" start-time="2018-03-13 21:14:33Z" end-time="2018-03-13 21:14:33Z" duration="0.000790" asserts="1" />
         </test-suite>
       </test-suite>
     </test-suite>
