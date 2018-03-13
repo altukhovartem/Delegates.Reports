@@ -9,6 +9,8 @@ namespace Delegates.Reports
 	public abstract class ReportMaker
 	{
 
+
+
 		protected abstract string MakeCaption(string caption);
 		protected abstract string BeginList();
 		protected abstract string MakeItem(string valueType, string entry);
@@ -114,6 +116,8 @@ namespace Delegates.Reports
 
 	public static class ReportMakerHelper
 	{
+		static Func<string, string, string, string, object, string, string> func;
+
 		public static string MeanAndStdHtmlReport(IEnumerable<Measurement> data)
 		{
 			return new MeanAndStdHtmlReportMaker().MakeReport(data);
