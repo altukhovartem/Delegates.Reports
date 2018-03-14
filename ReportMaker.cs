@@ -8,55 +8,81 @@ namespace Delegates.Reports
 {
 	public abstract class ReportMaker
 	{
-		protected AbstractCaption AbstractCaption;
-		protected AbstractList AbstractList;
-		protected AbstractItem AbstractItem;
-		protected AbstractStatistic AbstractStatistic;
+		protected AbstractReport report;
 
 		public string MakeReport(IEnumerable<Measurement> measurements)
 		{
 			var data = measurements.ToList();
 			var result = new StringBuilder();
-			result.Append(AbstractCaption.MakeCaption());
-			result.Append(AbstractList.BeginList());
-			result.Append(AbstractItem.MakeItem("Temperature", AbstractStatistic.MakeStatistics(data.Select(z => z.Temperature)).ToString()));
-			result.Append(AbstractItem.MakeItem("Humidity", AbstractStatistic.MakeStatistics(data.Select(z => z.Humidity)).ToString()));
-			result.Append(AbstractList.EndList());
+			result.Append(report.MakeCaption());
+			result.Append(report.ReportStartList);
+			result.Append(report.MakeItem("Temperature", report.GetStatistic(data.Select(z => z.Temperature)).ToString()));
+			result.Append(report.MakeItem("Humidity", report.GetStatistic(data.Select(z => z.Humidity)).ToString()));
+			result.Append(report.ReportEndList);
 			return result.ToString();
 		}
 	}
 
-	#region Caption
+	#region Report
 
-	public abstract class AbstractCaption
+	public abstract class AbstractReport
 	{
-		public string Caption { get; set; }
+		public string Caption { get; protected set; }
+		public string ReportStartList { get; protected set; }
+		public string ReportEndList { get; protected set; }
+		public AbstractStatistic ReportStatistic { get; protected set; }
+
 		public abstract string MakeCaption();
+		public abstract string MakeItem(string ValueType, string Entry);
+		public virtual object GetStatistic(IEnumerable<double> data)
+		{
+			return ReportStatistic.MakeStatistics(data);
+		}
 	}
 
-	public class HTMLCaption : AbstractCaption
+	public class HTMLReport : AbstractReport
 	{
-		public HTMLCaption(string Caption)
+
+		public HTMLReport(string Caption, AbstractStatistic Statistic)
 		{
 			this.Caption = Caption;
+			ReportStartList = "<ul>";
+			ReportEndList = "</ul>";
+			ReportStatistic = Statistic;
 		}
+
 		public override string MakeCaption()
 		{
 			return $"<h1>{Caption}</h1>";
 		}
+
+		public override string MakeItem(string ValueType, string Entry)
+		{
+			return $"<li><b>{ValueType}</b>: {Entry}";
+		}
 	}
 
-	public class MarkdownCaption : AbstractCaption
+	public class MarkdownReport : AbstractReport
 	{
-		public MarkdownCaption(string Caption)
+		public MarkdownReport(string Caption, AbstractStatistic Statistic)
 		{
 			this.Caption = Caption;
+			ReportStartList = string.Empty;
+			ReportEndList = string.Empty;
+			this.ReportStatistic = Statistic;
 		}
+
 		public override string MakeCaption()
 		{
 			return $"## {Caption}\n\n";
 		}
+
+		public override string MakeItem(string ValueType, string Entry)
+		{
+			return $" * **{ValueType}**: {Entry}\n\n";
+		}
 	}
+
 	#endregion
 
 	#region Statistic
@@ -96,76 +122,13 @@ namespace Delegates.Reports
 
 	#endregion
 
-	#region List
-
-	public abstract class AbstractList
-	{
-		public abstract string BeginList();
-		public abstract string EndList();
-	}
-
-	public class HTMLList : AbstractList
-	{
-		public override string BeginList()
-		{
-			return "<ul>";
-		}
-
-		public override string EndList()
-		{
-			return "</ul>";
-		}
-	}
-
-	public class MarkdownList : AbstractList
-	{
-		public override string BeginList()
-		{
-			return string.Empty;
-		}
-
-		public override string EndList()
-		{
-			return string.Empty;
-		}
-	}
-
-	#endregion
-
-	#region Item
-
-	public abstract class AbstractItem
-	{
-		public abstract string MakeItem(string valueType, string Entry);
-	}
-
-	public class HTMLItem : AbstractItem
-	{
-		public override string MakeItem(string ValueType, string Entry)
-		{
-			return $"<li><b>{ValueType}</b>: {Entry}";
-		}
-	}
-
-	public class MarkdownItem : AbstractItem
-	{
-		public override string MakeItem(string ValueType, string Entry)
-		{
-			return $" * **{ValueType}**: {Entry}\n\n";
-		}
-	}
-
-	#endregion
-
+	#region Makers
 
 	public class MeanAndStdHtmlReportMaker : ReportMaker
 	{
 		public MeanAndStdHtmlReportMaker()
 		{
-			AbstractCaption = new HTMLCaption("Mean and Std");
-			AbstractList = new HTMLList();
-			AbstractStatistic = new MeanAndStdStatistic();
-			AbstractItem = new HTMLItem();
+			this.report = new HTMLReport("Mean and Std", new MeanAndStdStatistic());
 		}
 	}
 
@@ -173,10 +136,7 @@ namespace Delegates.Reports
 	{
 		public MedianMarkdownReportMaker()
 		{
-			AbstractCaption = new MarkdownCaption("Median");
-			AbstractList = new MarkdownList();
-			AbstractStatistic = new MarkdownStatistic();
-			AbstractItem = new MarkdownItem();
+			this.report = new MarkdownReport("Median", new MarkdownStatistic());
 		}
 	}
 
@@ -184,10 +144,7 @@ namespace Delegates.Reports
 	{
 		public MeanAndStdMarkdownReportMaker()
 		{
-			AbstractCaption = new MarkdownCaption("Mean and Std");
-			AbstractList = new MarkdownList();
-			AbstractStatistic = new MeanAndStdStatistic();
-			AbstractItem = new MarkdownItem();
+			this.report = new MarkdownReport("Mean and Std", new MeanAndStdStatistic());
 		}
 	}
 
@@ -195,12 +152,12 @@ namespace Delegates.Reports
 	{
 		public MedianHtmlReportMaker()
 		{
-			AbstractCaption = new HTMLCaption("Median");
-			AbstractList = new HTMLList();
-			AbstractStatistic = new MarkdownStatistic();
-			AbstractItem = new HTMLItem();
+			this.report = new HTMLReport("Median", new MarkdownStatistic());
 		}
 	}
+
+	#endregion
+
 
 	public static class ReportMakerHelper
 	{
