@@ -6,19 +6,24 @@ using System.Threading.Tasks;
 
 namespace Delegates.Reports
 {
-	public abstract class ReportMaker
+	public class ReportMaker
 	{
-		protected AbstractReport report;
+		public AbstractReport Report { get; set; }
+
+		public ReportMaker(AbstractReport Report)
+		{
+			this.Report = Report;
+		}
 
 		public string MakeReport(IEnumerable<Measurement> measurements)
 		{
 			var data = measurements.ToList();
 			var result = new StringBuilder();
-			result.Append(report.MakeCaption());
-			result.Append(report.ReportStartList);
-			result.Append(report.MakeItem("Temperature", report.GetStatistic(data.Select(z => z.Temperature)).ToString()));
-			result.Append(report.MakeItem("Humidity", report.GetStatistic(data.Select(z => z.Humidity)).ToString()));
-			result.Append(report.ReportEndList);
+			result.Append(Report.MakeCaption());
+			result.Append(Report.ReportStartList);
+			result.Append(Report.MakeItem("Temperature", Report.GetStatistic(data.Select(z => z.Temperature)).ToString()));
+			result.Append(Report.MakeItem("Humidity", Report.GetStatistic(data.Select(z => z.Humidity)).ToString()));
+			result.Append(Report.ReportEndList);
 			return result.ToString();
 		}
 	}
@@ -122,63 +127,32 @@ namespace Delegates.Reports
 
 	#endregion
 
-	#region Makers
-
-	public class MeanAndStdHtmlReportMaker : ReportMaker
-	{
-		public MeanAndStdHtmlReportMaker()
-		{
-			this.report = new HTMLReport("Mean and Std", new MeanAndStdStatistic());
-		}
-	}
-
-	public class MedianMarkdownReportMaker : ReportMaker
-	{
-		public MedianMarkdownReportMaker()
-		{
-			this.report = new MarkdownReport("Median", new MarkdownStatistic());
-		}
-	}
-
-	public class MeanAndStdMarkdownReportMaker : ReportMaker
-	{
-		public MeanAndStdMarkdownReportMaker()
-		{
-			this.report = new MarkdownReport("Mean and Std", new MeanAndStdStatistic());
-		}
-	}
-
-	public class MedianHtmlReportMaker : ReportMaker
-	{
-		public MedianHtmlReportMaker()
-		{
-			this.report = new HTMLReport("Median", new MarkdownStatistic());
-		}
-	}
-
-	#endregion
-
-
 	public static class ReportMakerHelper
 	{
+		private static ReportMaker ReportMaker;
+
 		public static string MeanAndStdHtmlReport(IEnumerable<Measurement> data)
 		{
-			return new MeanAndStdHtmlReportMaker().MakeReport(data);
+			ReportMaker = new ReportMaker(new HTMLReport("Mean and Std", new MeanAndStdStatistic()));
+			return ReportMaker.MakeReport(data);
 		}
 
 		public static string MedianMarkdownReport(IEnumerable<Measurement> data)
 		{
-			return new MedianMarkdownReportMaker().MakeReport(data);
+			ReportMaker = new ReportMaker(new MarkdownReport("Median", new MarkdownStatistic()));
+			return ReportMaker.MakeReport(data);
 		}
 
 		public static string MeanAndStdMarkdownReport(IEnumerable<Measurement> measurements)
 		{
-			return new MeanAndStdMarkdownReportMaker().MakeReport(measurements);
+			ReportMaker = new ReportMaker(new MarkdownReport("Mean and Std", new MeanAndStdStatistic()));
+			return ReportMaker.MakeReport(measurements);
 		}
 
 		public static string MedianHtmlReport(IEnumerable<Measurement> measurements)
 		{
-			return new MedianHtmlReportMaker().MakeReport(measurements);
+			ReportMaker = new ReportMaker(new HTMLReport("Median", new MarkdownStatistic()));
+			return ReportMaker.MakeReport(measurements);
 		}
 	}
 }
