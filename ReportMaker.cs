@@ -27,15 +27,49 @@ namespace Delegates.Reports
 			return result.ToString();
 		}
 	}
+	public static class ReportMakerHelper
+	{
+		private static ReportMaker ReportMaker;
+
+		public static string MeanAndStdHtmlReport(IEnumerable<Measurement> data)
+		{
+			ReportMaker = new ReportMaker(new HTMLReport(new MeanAndStdStatistic()));
+			return ReportMaker.MakeReport(data);
+		}
+
+		public static string MedianMarkdownReport(IEnumerable<Measurement> data)
+		{
+			ReportMaker = new ReportMaker(new MarkdownReport(new MarkdownStatistic()));
+			return ReportMaker.MakeReport(data);
+		}
+
+		public static string MeanAndStdMarkdownReport(IEnumerable<Measurement> measurements)
+		{
+			ReportMaker = new ReportMaker(new MarkdownReport(new MeanAndStdStatistic()));
+			return ReportMaker.MakeReport(measurements);
+		}
+
+		public static string MedianHtmlReport(IEnumerable<Measurement> measurements)
+		{
+			ReportMaker = new ReportMaker(new HTMLReport(new MarkdownStatistic()));
+			return ReportMaker.MakeReport(measurements);
+		}
+	}
 
 	#region Report
 
 	public abstract class AbstractReport
 	{
-		public string Caption { get; protected set; }
+		public string Caption { get; set; }
 		public string ReportStartList { get; protected set; }
 		public string ReportEndList { get; protected set; }
 		public AbstractStatistic ReportStatistic { get; protected set; }
+
+		public AbstractReport(AbstractStatistic Statistic)
+		{
+			ReportStatistic = Statistic;
+			this.Caption = Statistic.Name;
+		}
 
 		public abstract string MakeCaption();
 		public abstract string MakeItem(string ValueType, string Entry);
@@ -48,12 +82,11 @@ namespace Delegates.Reports
 	public class HTMLReport : AbstractReport
 	{
 
-		public HTMLReport(string Caption, AbstractStatistic Statistic)
+		public HTMLReport(AbstractStatistic Statistic)
+			:base(Statistic)
 		{
-			this.Caption = Caption;
 			ReportStartList = "<ul>";
 			ReportEndList = "</ul>";
-			ReportStatistic = Statistic;
 		}
 
 		public override string MakeCaption()
@@ -69,12 +102,11 @@ namespace Delegates.Reports
 
 	public class MarkdownReport : AbstractReport
 	{
-		public MarkdownReport(string Caption, AbstractStatistic Statistic)
+		public MarkdownReport(AbstractStatistic Statistic)
+			: base(Statistic)
 		{
-			this.Caption = Caption;
 			ReportStartList = string.Empty;
 			ReportEndList = string.Empty;
-			this.ReportStatistic = Statistic;
 		}
 
 		public override string MakeCaption()
@@ -95,10 +127,13 @@ namespace Delegates.Reports
 	public abstract class AbstractStatistic
 	{
 		public abstract object MakeStatistics(IEnumerable<double> _data);
+		public abstract string Name { get; }
 	}
 
 	public class MeanAndStdStatistic : AbstractStatistic
 	{
+		public override string Name { get => "Mean and Std"; }
+
 		public override object MakeStatistics(IEnumerable<double> _data)
 		{
 			var data = _data.ToList();
@@ -115,6 +150,7 @@ namespace Delegates.Reports
 
 	public class MarkdownStatistic : AbstractStatistic
 	{
+		public override string Name { get => "Median"; }
 		public override object MakeStatistics(IEnumerable<double> data)
 		{
 			var list = data.OrderBy(z => z).ToList();
@@ -127,32 +163,4 @@ namespace Delegates.Reports
 
 	#endregion
 
-	public static class ReportMakerHelper
-	{
-		private static ReportMaker ReportMaker;
-
-		public static string MeanAndStdHtmlReport(IEnumerable<Measurement> data)
-		{
-			ReportMaker = new ReportMaker(new HTMLReport("Mean and Std", new MeanAndStdStatistic()));
-			return ReportMaker.MakeReport(data);
-		}
-
-		public static string MedianMarkdownReport(IEnumerable<Measurement> data)
-		{
-			ReportMaker = new ReportMaker(new MarkdownReport("Median", new MarkdownStatistic()));
-			return ReportMaker.MakeReport(data);
-		}
-
-		public static string MeanAndStdMarkdownReport(IEnumerable<Measurement> measurements)
-		{
-			ReportMaker = new ReportMaker(new MarkdownReport("Mean and Std", new MeanAndStdStatistic()));
-			return ReportMaker.MakeReport(measurements);
-		}
-
-		public static string MedianHtmlReport(IEnumerable<Measurement> measurements)
-		{
-			ReportMaker = new ReportMaker(new HTMLReport("Median", new MarkdownStatistic()));
-			return ReportMaker.MakeReport(measurements);
-		}
-	}
 }
